@@ -1,10 +1,11 @@
 import React, { useContext, useState, Fragment } from 'react'
 import { useObserver } from 'mobx-react'
 import { CTX } from './Store'
+import { Context } from './models/User'
 
 const App = (): JSX.Element => {
 
-    const store = useContext(CTX)
+    const store = useContext<Context>(CTX)
 
     const [ name, setName ] = useState<string>("")
     const [ price, setPrice ] = useState<string>("0.00")
@@ -14,7 +15,7 @@ const App = (): JSX.Element => {
         e.preventDefault()
         const item = {
             name,
-            price: parseFloat(parseFloat(price).toFixed(2)),
+            price: parseFloat(price).toFixed(2),
             quantity: parseInt(quantity)
         }
         store.cart.addItem(item)

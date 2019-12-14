@@ -1,6 +1,6 @@
 import React, { createContext } from 'react'
 import makeInspectable from 'mobx-devtools-mst'
-import User from './models/User'
+import { User, Context } from './models/User'
 
 const store = User.create({
     firstName: "",
@@ -9,9 +9,9 @@ const store = User.create({
     _id: ""
 })
 
-export const CTX = createContext(store)
+const CTX = createContext<Context>(store)
 
-export const Store = ({children}): JSX.Element => {
+const Store = ({children}): JSX.Element => {
     return(
         <CTX.Provider value={store}>
             {children}
@@ -20,4 +20,6 @@ export const Store = ({children}): JSX.Element => {
 }
 
 makeInspectable(store)
+
+export { Store, CTX }
 
